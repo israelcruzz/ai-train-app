@@ -3,21 +3,22 @@ import { ScrollView, StyleSheet, Text } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
 import { router } from 'expo-router'
 import { TouchableWithoutFeedback } from "react-native";
+import { useFavContext } from "@/app/context/fav-provider";
 
 interface TrainCardProps {
   text: string;
   loading: boolean;
-  isFav?: boolean;
 }
 
 export default function TrainCard({
   text,
   loading,
-  isFav = false,
 }: TrainCardProps) {
   function handleClick(){
     router.navigate(`/train/${text}`)
   }
+
+  const { isFav } = useFavContext();
 
   return (
     <ScrollView
@@ -38,7 +39,7 @@ export default function TrainCard({
         <Pressable style={styles.heartButton}>
           <IconSet
             name="heart-fill"
-            color={isFav ? "#FF1E1E" : "#FFFFFF"}
+            color={isFav(text) ? "#FF1E1E" : "#FFFFFF"}
             size={18}
           />
         </Pressable>

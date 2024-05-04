@@ -2,7 +2,7 @@ import { ReactNode, useContext, useState } from "react";
 import { FavContext } from "./fav-context";
 
 export function FavProvider({ children }: { children: ReactNode }) {
-  const [favoriteTrains, setFavoriteTrains] = useState<string[]>([]);
+  const [favoriteTrains, setFavoriteTrains] = useState<string[]>(["a"]);
 
   const addFavoriteTrain = (train: string) => {
     setFavoriteTrains((prev) => {
@@ -21,8 +21,18 @@ export function FavProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const isFav = (train: string) => {
+    const existTrain = favoriteTrains.find(
+      (prevTrain) =>
+        prevTrain.toLocaleLowerCase().trim() ===
+        train.toLocaleLowerCase().trim()
+    );
+
+    return existTrain ? true : false
+  };
+
   return (
-    <FavContext.Provider value={{ favoriteTrains, addFavoriteTrain }}>
+    <FavContext.Provider value={{ favoriteTrains, addFavoriteTrain, isFav }}>
       {children}
     </FavContext.Provider>
   );
