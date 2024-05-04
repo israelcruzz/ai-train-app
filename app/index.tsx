@@ -22,7 +22,7 @@ export default function Init() {
           Monte seus treinos agora utilizando texto gerado por IA
         </Text>
 
-        <Link href="/" style={styles.buttonArea} asChild>
+        <Link href="/home/" style={styles.buttonArea} asChild>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Entrar</Text>
           </TouchableOpacity>
