@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Link } from "expo-router";
+import Button from "@/components/button";
 
 export default function Init() {
   return (
@@ -23,9 +24,7 @@ export default function Init() {
         </Text>
 
         <Link href="/home/" style={styles.buttonArea} asChild>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
+          <Button title="Entrar" />
         </Link>
       </View>
     </View>
