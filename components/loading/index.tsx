@@ -7,7 +7,7 @@ export default function LoadingScreen() {
 const styles = StyleSheet.create({
   loading: {
     flex: 1,
-    backgroundColor: "#B6F09C",
+    backgroundColor: "#111417",
     alignItems: "center",
     justifyContent: "center",
     color: "#FFF",
