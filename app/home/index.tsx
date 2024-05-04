@@ -1,8 +1,15 @@
+import Button from "@/components/button";
+import Section from "@/components/section";
+import { useState } from "react";
 import { TextInput } from "react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
 
 export default function Home() {
+    const [prompt, setPrompt] = useState('')
+    console.log(prompt);
+    
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -16,13 +23,11 @@ export default function Home() {
 
         {/* Form */}
       <View>
-        <Text>Prompt</Text>
+        <Section title={`Prompt (${prompt.length}/360)`} />
 
-        <TextInput placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)" />
+        <TextInput placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)" style={styles.textArea} placeholderTextColor="#FFFFFF" onChangeText={setPrompt} />
 
-        <TouchableOpacity>
-            <Text>Criar</Text>
-        </TouchableOpacity>
+        <Button title="Criar" />
       </View>
     </View>
   );
@@ -40,7 +45,8 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 24
     },
     favButton: {
         width: 42,
@@ -55,5 +61,23 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 24,
         color: '#C5F3B0'
+    },
+    textArea: {
+        width: '100%',
+        height: 162,
+        padding: 16,
+        backgroundColor: '#292B2E',
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#404148",
+        textAlignVertical: 'top',
+        color: "#FFFFFF",
+        marginBottom: 24
+    },
+    prompText: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: "#616365",
+        marginBottom: 12
     }
 })
