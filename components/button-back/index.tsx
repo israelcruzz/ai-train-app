@@ -4,7 +4,7 @@ import IconSet from "react-native-vector-icons/Octicons";
 
 export default function ButtonBack() {
   function handleBackScreen() {
-    router.navigate("/home");
+    router.back();
   }
 
   return (

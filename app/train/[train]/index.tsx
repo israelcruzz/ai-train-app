@@ -1,4 +1,4 @@
-import Section from "@/components/section";
+import Header from "@/components/header";
 import TrainCard from "@/components/train-card";
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, View } from "react-native";
@@ -8,7 +8,7 @@ export default function Train() {
 
   return (
     <View style={styles.container}>
-      <Section title="Treino" active />
+      <Header name="Treino" />
 
       <TrainCard loading={false} text={train.toString()} />
     </View>
