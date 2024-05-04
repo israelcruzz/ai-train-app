@@ -7,6 +7,7 @@ import {
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
 import LoadingScreen from "@/components/loading";
+import { FavProvider } from "./context/fav-provider";
 
 export default function Layout() {
   const [fontLoading] = useFonts({
@@ -16,5 +17,15 @@ export default function Layout() {
     Inter_700Bold,
   });
 
-  return <>{fontLoading ? <Slot /> : <LoadingScreen />}</>;
+  return (
+    <>
+      {fontLoading ? (
+        <FavProvider>
+          <Slot />
+        </FavProvider>
+      ) : (
+        <LoadingScreen />
+      )}
+    </>
+  );
 }
