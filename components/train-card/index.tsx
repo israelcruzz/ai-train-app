@@ -1,12 +1,14 @@
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import { ScrollView, StyleSheet, Text } from "react-native";
+import IconSet from "react-native-vector-icons/Octicons";
 
 interface TrainCardProps {
   text?: string;
   loading: boolean;
+  isFav?: boolean
 }
 
-export default function TrainCard({ text, loading }: TrainCardProps) {
+export default function TrainCard({ text, loading, isFav = false }: TrainCardProps) {
   return (
     <ScrollView
       style={styles.container}
@@ -21,6 +23,10 @@ export default function TrainCard({ text, loading }: TrainCardProps) {
           text
         )}
       </Text>
+
+      <Pressable style={styles.heartButton}>
+        <IconSet name="heart-fill" color={isFav ? '#FF1E1E' : '#FFFFFF'} size={18} />
+      </Pressable>
     </ScrollView>
   );
 }
@@ -33,18 +39,23 @@ const styles = StyleSheet.create({
     borderColor: "#34363C",
     padding: 24,
     borderRadius: 4,
+    position: 'relative'
   },
   text: {
     color: "#FFFFFF",
     fontSize: 16,
   },
   loading: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   loadingText: {
     color: "#FFFFFF",
-    textAlign: 'center'
+    textAlign: "center",
+  },
+  heartButton: {
+    position: 'absolute',
+    right: 0,
   }
 });
