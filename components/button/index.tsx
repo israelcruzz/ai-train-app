@@ -7,11 +7,16 @@ import {
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
+  isDisabled?: boolean;
 }
 
-export default function Button({ title, ...rest }: ButtonProps) {
+export default function Button({ title, isDisabled = false, ...rest }: ButtonProps) {
   return (
-    <TouchableOpacity {...rest} style={styles.button}>
+    <TouchableOpacity
+      {...rest}
+      style={[styles.button, isDisabled && styles.buttonDisabled]}
+      disabled={isDisabled}
+    >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -30,5 +35,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 16,
     textAlign: "center",
+  },
+  buttonDisabled: {
+    backgroundColor: "#B6F09C",
+    opacity: 0.6,
   },
 });

@@ -9,7 +9,12 @@ import IconSet from "react-native-vector-icons/Octicons";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
-  console.log(prompt);
+  const [loading, setLoading] = useState(false);
+  const [train, setTrain] = useState("");
+
+  function handleGenerateTrain(){
+    setLoading(true)
+  }
 
   return (
     <View style={styles.container}>
@@ -25,7 +30,7 @@ export default function Home() {
 
       {/* Form */}
       <View>
-        <Section title={`Prompt (${prompt.length}/360)`} />
+        <Section title={`Prompt (${prompt.length}/20)`} />
 
         <TextInput
           placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)"
@@ -34,14 +39,24 @@ export default function Home() {
           onChangeText={setPrompt}
         />
 
-        <Button title="Criar" />
+        <Button title="Criar" onPress={handleGenerateTrain} isDisabled={prompt.length === 0 || prompt.length >= 20} />
       </View>
 
       {/* Train */}
-      <View>
-        <Section title="Treino Gerado" />
+      <View style={styles.trainArea}>
+        {loading && (
+          <>
+            <Section title="Gerando Treino" />
+            <TrainCard loading text="a" />
+          </>
+        )}
 
-        <TrainCard loading />
+        {train && (
+          <>
+            <Section title="Treino Gerado" />
+            <TrainCard loading={false} text={train} />
+          </>
+        )}
       </View>
     </View>
   );
@@ -93,5 +108,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#616365",
     marginBottom: 12,
+  },
+  trainArea: {
+    marginTop: 24,
   },
 });
