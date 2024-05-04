@@ -1,8 +1,8 @@
-# TrainAi
+# AiTrain
 
 ## Descrição
 
-O TrainAi é um aplicativo móvel desenvolvido em React Native que permite aos usuários gerar treinos personalizados para a academia. Com este aplicativo, os usuários podem criar, favoritar e visualizar treinos para diferentes grupos musculares, como costas, peito, pernas, etc. O aplicativo utiliza a integração com a OpenAI para gerar treinos personalizados com base nas preferências e nos objetivos do usuário.
+O AiTrain é um aplicativo móvel desenvolvido em React Native que permite aos usuários gerar treinos personalizados para a academia. Com este aplicativo, os usuários podem criar, favoritar e visualizar treinos para diferentes grupos musculares, como costas, peito, pernas, etc. O aplicativo utiliza a integração com a OpenAI para gerar treinos personalizados com base nas preferências e nos objetivos do usuário.
 
 ## Funcionalidades Principais
 
