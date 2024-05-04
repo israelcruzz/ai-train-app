@@ -1,42 +1,52 @@
 import { Pressable, TouchableOpacity, View } from "react-native";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
-import { router } from 'expo-router'
-import { TouchableWithoutFeedback } from "react-native";
+import { router } from "expo-router";
 import { useFavContext } from "@/app/context/fav-provider";
+import { useState } from "react";
 
 interface TrainCardProps {
   text: string;
   loading: boolean;
 }
 
-export default function TrainCard({
-  text,
-  loading,
-}: TrainCardProps) {
-  function handleClick(){
-    router.navigate(`/train/${text}`)
+export default function TrainCard({ text, loading }: TrainCardProps) {
+  const [points, setPoints] = useState('.')
+
+  function generatePoints(){
+    setTimeout(() => {
+      setPoints((prev) => prev += '.')
+    }, 1000)
+
+    return points
   }
 
-  const { isFav } = useFavContext();
+  function handleClick() {
+    router.navigate(`/train/${text}`);
+  }
+
+  const { isFav, addFavoriteTrain } = useFavContext();
 
   return (
     <ScrollView
       style={styles.scrollViewArea}
       contentContainerStyle={{ paddingBottom: 24 }}
     >
-      <TouchableOpacity  style={styles.container} onPress={handleClick}>
+      <TouchableOpacity style={styles.container} onPress={handleClick}>
         <Text style={styles.text}>
           {loading ? (
             <View style={styles.loading}>
-              <Text style={styles.loadingText}>Gerando...</Text>
+              <Text style={styles.loadingText}>{`Gerando${generatePoints()}`}</Text>
             </View>
           ) : (
             text
           )}
         </Text>
 
-        <Pressable style={styles.heartButton}>
+        <Pressable
+          style={styles.heartButton}
+          onPress={() => text.length !== 0 && addFavoriteTrain(text)}
+        >
           <IconSet
             name="heart-fill"
             color={isFav(text) ? "#FF1E1E" : "#FFFFFF"}
@@ -77,6 +87,6 @@ const styles = StyleSheet.create({
   heartButton: {
     position: "absolute",
     right: 0,
-    margin: 16
+    margin: 16,
   },
 });

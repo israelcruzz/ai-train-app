@@ -47,7 +47,7 @@ export default function Home() {
         {loading && (
           <>
             <Section title="Gerando Treino" />
-            <TrainCard loading text="a" />
+            <TrainCard loading text="" />
           </>
         )}
 
