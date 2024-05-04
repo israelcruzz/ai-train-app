@@ -2,7 +2,7 @@ import { ReactNode, useContext, useState } from "react";
 import { FavContext } from "./fav-context";
 
 export function FavProvider({ children }: { children: ReactNode }) {
-  const [favoriteTrains, setFavoriteTrains] = useState<string[]>(["a"]);
+  const [favoriteTrains, setFavoriteTrains] = useState<string[]>(["Treino de Superiores:"]);
 
   const addFavoriteTrain = (train: string) => {
     setFavoriteTrains((prev) => {

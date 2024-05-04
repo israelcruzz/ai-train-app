@@ -11,14 +11,14 @@ interface TrainCardProps {
 }
 
 export default function TrainCard({ text, loading }: TrainCardProps) {
-  const [points, setPoints] = useState('.')
+  const [points, setPoints] = useState(".");
 
-  function generatePoints(){
+  function generatePoints() {
     setTimeout(() => {
-      setPoints((prev) => prev += '.')
-    }, 1000)
+      setPoints((prev) => (prev += "."));
+    }, 1000);
 
-    return points
+    return points;
   }
 
   function handleClick() {
@@ -36,23 +36,29 @@ export default function TrainCard({ text, loading }: TrainCardProps) {
         <Text style={styles.text}>
           {loading ? (
             <View style={styles.loading}>
-              <Text style={styles.loadingText}>{`Gerando${generatePoints()}`}</Text>
+              <Text
+                style={styles.loadingText}
+              >{`Gerando${generatePoints()}`}</Text>
             </View>
           ) : (
             text
           )}
         </Text>
 
-        <Pressable
-          style={styles.heartButton}
-          onPress={() => text.length !== 0 && addFavoriteTrain(text)}
-        >
-          <IconSet
-            name="heart-fill"
-            color={isFav(text) ? "#FF1E1E" : "#FFFFFF"}
-            size={18}
-          />
-        </Pressable>
+        {loading === false && (
+          <>
+            <Pressable
+              style={styles.heartButton}
+              onPress={() => text.length !== 0 && addFavoriteTrain(text)}
+            >
+              <IconSet
+                name="heart-fill"
+                color={isFav(text) ? "#FF1E1E" : "#FFFFFF"}
+                size={18}
+              />
+            </Pressable>
+          </>
+        )}
       </TouchableOpacity>
     </ScrollView>
   );

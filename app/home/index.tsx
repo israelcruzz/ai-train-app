@@ -3,22 +3,58 @@ import Section from "@/components/section";
 import TrainCard from "@/components/train-card";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { TextInput } from "react-native";
+import { Keyboard, TextInput } from "react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
 
+const APIKEY = process.env.EXPO_PUBLIC_OPEN_AI_KEY;
+
 export default function Home() {
-  const [prompt, setPrompt] = useState("");
+  const [promptTrain, setPromptTrain] = useState("");
   const [loading, setLoading] = useState(false);
   const [train, setTrain] = useState("");
 
-  function handleGenerateTrain(){
-    setLoading(true)
+  async function handleGenerateTrain() {
+    setLoading(true);
+
+    Keyboard.dismiss();
+
+    const promptGenerate = `Crie um treino para a academia de ${promptTrain}. Forneça apenas em tópicos com o nome de cada exercicio, quantas séries e repetições em cada um deles`;
+
+    fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${APIKEY}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo-1106",
+        messages: [
+          {
+            role: "user",
+            content: promptGenerate,
+          },
+        ],
+        temperature: 0.2,
+        max_tokens: 500,
+        top_p: 1,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.choices[0].message.content);
+        setTrain(data.choices[0].message.content);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headingText}>AiTrain</Text>
         <Link href="/favorites/" asChild>
@@ -28,21 +64,23 @@ export default function Home() {
         </Link>
       </View>
 
-      {/* Form */}
       <View>
-        <Section title={`Prompt (${prompt.length}/20)`} />
+        <Section title={`Prompt (${promptTrain.length}/20)`} />
 
         <TextInput
           placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)"
           style={styles.textArea}
           placeholderTextColor="#FFFFFF"
-          onChangeText={setPrompt}
+          onChangeText={setPromptTrain}
         />
 
-        <Button title="Criar" onPress={handleGenerateTrain} isDisabled={prompt.length === 0 || prompt.length >= 20} />
+        <Button
+          title="Criar"
+          onPress={handleGenerateTrain}
+          isDisabled={promptTrain.length === 0 || promptTrain.length >= 20}
+        />
       </View>
 
-      {/* Train */}
       <View style={styles.trainArea}>
         {loading && (
           <>
