@@ -1,7 +1,8 @@
 import Button from "@/components/button";
 import Section from "@/components/section";
+import TrainCard from "@/components/train-card";
 import { useState } from "react";
-import { TextInput } from "react-native";
+import { ScrollView, TextInput } from "react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
 
@@ -28,6 +29,13 @@ export default function Home() {
         <TextInput placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)" style={styles.textArea} placeholderTextColor="#FFFFFF" onChangeText={setPrompt} />
 
         <Button title="Criar" />
+      </View>
+
+      {/* Train */}
+      <View>
+        <Section title="Treino Gerado" />
+
+        <TrainCard loading />
       </View>
     </View>
   );
