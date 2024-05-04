@@ -1,3 +1,4 @@
+import { TextInput } from "react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IconSet from "react-native-vector-icons/Octicons";
 
@@ -10,6 +11,17 @@ export default function Home() {
 
         <TouchableOpacity style={styles.favButton}>
           <IconSet name="heart-fill" color="#FFFFFF" size={18} />
+        </TouchableOpacity>
+      </View>
+
+        {/* Form */}
+      <View>
+        <Text>Prompt</Text>
+
+        <TextInput placeholder="Digite o tipo de treino (ex: costa, biceps, completo...)" />
+
+        <TouchableOpacity>
+            <Text>Criar</Text>
         </TouchableOpacity>
       </View>
     </View>
